@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.mycomposition.R
 import com.example.mycomposition.databinding.FragmentGameBinding
 import com.example.mycomposition.domain.entity.GameResult
@@ -14,6 +15,7 @@ import com.example.mycomposition.domain.entity.Level
 class GameFragment : Fragment() {
 
     private lateinit var level: Level
+    private lateinit var viewModel: GameViewModel
 
     private var _binding: FragmentGameBinding? = null
     private val binding: FragmentGameBinding
@@ -34,6 +36,8 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory
+            .getInstance(requireActivity().application))[GameViewModel::class.java]
         binding.tvOption1.setOnClickListener {
             launchGameFinishedFragment(
                 GameResult(
